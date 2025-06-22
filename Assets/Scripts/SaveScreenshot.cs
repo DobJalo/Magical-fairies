@@ -6,7 +6,7 @@ using System.Text.RegularExpressions;
 
 public class SaveScreenshot : MonoBehaviour
 {
-    public GameObject infoMessage;
+    //public GameObject infoMessage;
     string folderPath;
     string fileName;
     Texture2D tex;
@@ -19,16 +19,6 @@ public class SaveScreenshot : MonoBehaviour
         //StartCoroutine(TakeScreenShotAndroid());
     }
 
-    /*IEnumerator TakeScreenShotPC() // full screen
-    {
-        yield return new WaitForEndOfFrame();
-
-        string folderPath = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
-        folderPath += "\\";
-
-        ScreenCapture.CaptureScreenshot(System.IO.Path.Combine(folderPath, "Magical Fairies_" + System.DateTime.Now.ToString("MM-dd-yy (HH-mm-ss)") + ".png"), 10);
-    }*/
-
     private void CreateTexture()
     {
         tex = new Texture2D(Screen.width / 2, Screen.height, TextureFormat.RGB24, false); // width, height
@@ -40,6 +30,7 @@ public class SaveScreenshot : MonoBehaviour
 
         fileName = "Magical Fairies_" + DateTime.Now.ToString("MM-dd-yy (HH-mm-ss)") + ".png";
     }
+
 
     private System.Collections.IEnumerator TakeScreenShotPC()
     {
@@ -80,7 +71,7 @@ public class SaveScreenshot : MonoBehaviour
         File.WriteAllBytes(fullPath, bytes);
 
 #if UNITY_ANDROID && !UNITY_EDITOR
-    // Обновляем галерею
+    // update gallery
     using (AndroidJavaClass mediaScanner = new AndroidJavaClass("android.media.MediaScannerConnection"))
     using (AndroidJavaObject activity = new AndroidJavaClass("com.unity3d.player.UnityPlayer")
                 .GetStatic<AndroidJavaObject>("currentActivity"))

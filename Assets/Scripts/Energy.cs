@@ -24,15 +24,14 @@ public class Energy : MonoBehaviour
         }
         else
         {
-            //energy = data.intData;
-            energy = 100; // JUST FOR TESTING
+            energy = data.floatData;
         }
 
         // set energy value to slider on screen
         energySlider.value = energy / 100; 
 
-        energyRemainingTime = 100; // 5 times * 60 seconds = 5 minutes CHANGE HERE
-        divisibleBy = energyRemainingTime / energy;
+        energyRemainingTime = 100; //  CHANGE HERE
+        divisibleBy = 1; //  CHANGE HERE
 
         //start
         Invoke("DecreaseEnergy", 1f);
@@ -52,7 +51,7 @@ public class Energy : MonoBehaviour
 
         // there is still time AND time divided by "number" == 0 AND player is not sleeping
         // decrease time
-        if (energyRemainingTime > 0 && (energyRemainingTime % divisibleBy == 0) && sleep == 0)
+        if (energy > 0 && (energyRemainingTime % divisibleBy == 0) && sleep == 0)
         {
             energy--;
             energySlider.value = energy / 100; // set energy value to slider on screen
@@ -61,7 +60,7 @@ public class Energy : MonoBehaviour
 
         // there is still time AND time divided by "number" == 0 AND player is sleeping
         // increase time
-        if (energyRemainingTime < 100 && (energyRemainingTime % divisibleBy == 0) && sleep == 1)
+        if (energy < 100 && (energyRemainingTime % divisibleBy == 0) && sleep == 1)
         {
             energy++;
             energySlider.value = energy / 100; // set energy value to slider on screen
@@ -76,6 +75,7 @@ public class Energy : MonoBehaviour
         {
             energyRemainingTime++;
         }
+
         Invoke("DecreaseEnergy", 1f);
     }
 
@@ -84,5 +84,4 @@ public class Energy : MonoBehaviour
 
 // ƒќЅј¬»“№ ѕќ“ќћ: если персонаж работает, то спуск быстрее
 
-//при низкой энергии нельз€ ничего делать
 //энерги€ отмечаетс€ разным цветом

@@ -4,13 +4,13 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-[System.Serializable]
+/*[System.Serializable]
 public class SaveMoney
 {
     public int money;
 }
 
-public static class SaveLoad
+public static class SaveLoadMoney
 {
     public static void Save(int moneyAmount, string fileName)
     {
@@ -51,7 +51,7 @@ public static class SaveLoad
         }
     }
 }
-
+*/
 public class MoneyManager : MonoBehaviour
 {
     private string fileName = "MoneyAmount.dat";
@@ -60,14 +60,14 @@ public class MoneyManager : MonoBehaviour
 
     private void Start()
     {
-        SaveMoney data = SaveLoad.Load(fileName);
+        SaveClass data = SaveLoadClass.Load(fileName);
         if (data == null)
         {
             currentMoney = 10;
         }
         else
         {
-            currentMoney = data.money;
+            currentMoney = data.intData;
         }
 
         moneyText.text = currentMoney.ToString();

@@ -1,4 +1,5 @@
 using System.IO;
+using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
@@ -31,7 +32,17 @@ public static class SaveLoadInt
             BinaryFormatter formatter = new BinaryFormatter();
             using (FileStream file = File.Open(path, FileMode.Open))
             {
-                return formatter.Deserialize(file) as SaveInt;
+                //return formatter.Deserialize(file) as SaveInt; //old
+                try
+                {
+                    return formatter.Deserialize(file) as SaveInt;
+                }
+                catch (SerializationException) // in case of errors delete file
+                {
+                    file.Close();
+                    File.Delete(path);
+                    return null;
+                }
             }
         }
         else
@@ -80,7 +91,17 @@ public static class SaveLoadFloat
             BinaryFormatter formatter = new BinaryFormatter();
             using (FileStream file = File.Open(path, FileMode.Open))
             {
-                return formatter.Deserialize(file) as SaveFloat;
+                //return formatter.Deserialize(file) as SaveFloat; //old
+                try
+                {
+                    return formatter.Deserialize(file) as SaveFloat;
+                }
+                catch (SerializationException) // in case of errors delete file
+                {
+                    file.Close();
+                    File.Delete(path);
+                    return null;
+                }
             }
         }
         else

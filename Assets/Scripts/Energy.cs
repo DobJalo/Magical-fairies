@@ -8,8 +8,10 @@ public class Energy : MonoBehaviour
     public Slider energySlider;
 
     private float energy;
-    private float decresingTime;
+    private float energyRemainingTime;
     private float divisibleBy;
+
+    private int sleep;
 
     private string fileName = "EnergyLeft.dat";
     void Start() 
@@ -29,8 +31,8 @@ public class Energy : MonoBehaviour
         // set energy value to slider on screen
         energySlider.value = energy / 100; 
 
-        decresingTime = 5 * 60; // 5 times * 60 seconds = 5 minutes
-        divisibleBy = decresingTime / energy;
+        energyRemainingTime = 100; // 5 times * 60 seconds = 5 minutes CHANGE HERE
+        divisibleBy = energyRemainingTime / energy;
 
         //start
         Invoke("DecreaseEnergy", 1f);
@@ -38,22 +40,48 @@ public class Energy : MonoBehaviour
 
     private void DecreaseEnergy()
     {
-        // there is still time AND time divided by "number" == 0
-        if (decresingTime > 0 && (decresingTime % divisibleBy == 0))
+        //get SLEEP integer to check if player is asleep (0 - awake, 1 - sleeping)
+        if (PlayerPrefs.HasKey("SleepingStatus"))
+        {
+            sleep = PlayerPrefs.GetInt("SleepingStatus"); 
+        }
+        else
+        {
+            sleep = 0; // player is awake
+        }
+
+        // there is still time AND time divided by "number" == 0 AND player is not sleeping
+        // decrease time
+        if (energyRemainingTime > 0 && (energyRemainingTime % divisibleBy == 0) && sleep == 0)
         {
             energy--;
             energySlider.value = energy / 100; // set energy value to slider on screen
             SaveLoadFloat.Save(energy, fileName); //save new energy value
         }
 
-        decresingTime--;
+        // there is still time AND time divided by "number" == 0 AND player is sleeping
+        // increase time
+        if (energyRemainingTime < 100 && (energyRemainingTime % divisibleBy == 0) && sleep == 1)
+        {
+            energy++;
+            energySlider.value = energy / 100; // set energy value to slider on screen
+            SaveLoadFloat.Save(energy, fileName); //save new energy value
+        }
+
+        if (sleep == 0)
+        {
+            energyRemainingTime--;
+        }
+        if (sleep == 1)
+        {
+            energyRemainingTime++;
+        }
         Invoke("DecreaseEnergy", 1f);
     }
 
 }
 
 
-// ЕСЛИ персонаж спит, то приостановить спуск
 // ДОБАВИТЬ ПОТОМ: если персонаж работает, то спуск быстрее
 
 //при низкой энергии нельзя ничего делать

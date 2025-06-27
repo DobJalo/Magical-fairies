@@ -13,7 +13,7 @@ public class AvailableClothes : MonoBehaviour
         {
             if (LipsArray.GetValue(i) == 0)
             {
-                lipsParent.transform.GetChild(i).gameObject.SetActive(false);
+                lipsParent.transform.GetChild(i).gameObject.SetActive(true); // CHANGE IT TO FALSE
             }
         }
     }

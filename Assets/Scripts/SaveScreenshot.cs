@@ -6,7 +6,6 @@ using System.Text.RegularExpressions;
 
 public class SaveScreenshot : MonoBehaviour
 {
-    //public GameObject infoMessage;
     string folderPath;
     string fileName;
     Texture2D tex;

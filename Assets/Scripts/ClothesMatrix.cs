@@ -1,6 +1,7 @@
 using UnityEngine;
 
-
+//0 - blocked
+//1 - shown
 public static class LipsArray
 {
     public static int[] items = new int[13];

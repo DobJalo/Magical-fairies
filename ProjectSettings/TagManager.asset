@@ -3,7 +3,15 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
-  tags: []
+  tags:
+  - TakeOff
+  - Lips
+  - Eyebrows
+  - Hair
+  - Clothes_top
+  - Clothes_bottom
+  - Hair_acc
+  - Wings
   layers:
   - Default
   - TransparentFX

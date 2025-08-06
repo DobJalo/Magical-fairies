@@ -1,19 +1,17 @@
-using UnityEngine;
+п»їusing UnityEngine;
 using UnityEngine.UI;
 
 public class OptionUnlocker : MonoBehaviour
 {
-    public string optionKey; // Пример: skin_option_2
-    public Button optionButton;
+    public string optionKey; 
     public GameObject lockIcon;
-
+    private Button optionButton;
     private bool isUnlocked;
 
-    void Start()
+    private void Start()
     {
+        optionKey = gameObject.name;
         optionButton = GetComponent<Button>();
-        lockIcon = transform.Find("LockIcon")?.gameObject;
-        optionKey = gameObject.name; // например, "skin_option_1"
 
         isUnlocked = PlayerPrefs.GetInt(optionKey + "_unlocked", 0) == 1;
         UpdateUI();
@@ -21,9 +19,30 @@ public class OptionUnlocker : MonoBehaviour
         optionButton.onClick.AddListener(OnOptionClicked);
     }
 
+    void Update()
+    {
+        // Reset when pressing D
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            PlayerPrefs.DeleteKey(optionKey + "_unlocked");
+            isUnlocked = false;
+            UpdateUI();
+            Debug.Log("Reset unlock state for {optionKey}");
+        }
+    }
+
     private void UpdateUI()
     {
-        lockIcon?.SetActive(!isUnlocked);
+        if (isUnlocked)
+        {
+            lockIcon?.SetActive(false);
+            optionButton.interactable = true;
+        }
+        else
+        {
+            lockIcon?.SetActive(true);
+            optionButton.interactable = true;
+        }
     }
 
     private void OnOptionClicked()
@@ -34,22 +53,30 @@ public class OptionUnlocker : MonoBehaviour
         }
         else
         {
-            AdManager adManager = FindFirstObjectByType<AdManager>();
+            TryUnlockWithAd();
+        }
+    }
 
-            adManager.ShowRewarded(() =>
+    private void TryUnlockWithAd()
+    {
+        if (AdManager.Instance != null && AdManager.Instance.IsRewardedReady)
+        {
+            AdManager.Instance.ShowRewarded(() =>
             {
+                isUnlocked = true;
                 PlayerPrefs.SetInt(optionKey + "_unlocked", 1);
                 PlayerPrefs.Save();
-                isUnlocked = true;
                 UpdateUI();
-                ApplyOption();
             });
+        }
+        else
+        {
+            Debug.Log("Rewarded ad not ready.");
         }
     }
 
     private void ApplyOption()
     {
-        Debug.Log("Option применён: " + optionKey);
-        // Здесь можно активировать скин или вызвать нужный метод
+        Debug.Log("Option applied: " + optionKey);
     }
 }

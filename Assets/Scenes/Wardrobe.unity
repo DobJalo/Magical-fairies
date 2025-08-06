@@ -1435,7 +1435,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   optionKey: 
-  optionButton: {fileID: 0}
   lockIcon: {fileID: 1735076532}
 --- !u!1 &65773659
 GameObject:
@@ -10816,7 +10815,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   optionKey: 
-  optionButton: {fileID: 0}
   lockIcon: {fileID: 492842098}
 --- !u!1 &289318029
 GameObject:
@@ -14251,8 +14249,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 635132532}
   m_HandleRect: {fileID: 635132531}
   m_Direction: 0
-  m_Value: -0.0000010802679
-  m_Size: 0.6957692
+  m_Value: -0.0000009259442
+  m_Size: 0.69576925
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -43556,7 +43554,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   optionKey: 
-  optionButton: {fileID: 0}
   lockIcon: {fileID: 1499834681}
 --- !u!1 &1111758990
 GameObject:
@@ -53470,7 +53467,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   optionKey: 
-  optionButton: {fileID: 0}
   lockIcon: {fileID: 1773691526}
 --- !u!1 &1398854807
 GameObject:
@@ -59919,7 +59915,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   optionKey: 
-  optionButton: {fileID: 0}
   lockIcon: {fileID: 1154754179}
 --- !u!1 &1547384790
 GameObject:
@@ -82805,7 +82800,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   optionKey: 
-  optionButton: {fileID: 0}
   lockIcon: {fileID: 1700618253}
 --- !u!1 &2112641547
 GameObject:

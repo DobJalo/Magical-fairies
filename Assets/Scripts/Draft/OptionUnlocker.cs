@@ -35,13 +35,13 @@ public class OptionUnlocker : MonoBehaviour
     {
         if (isUnlocked)
         {
-            lockIcon?.SetActive(false);
-            optionButton.interactable = true;
+            lockIcon.SetActive(false);
+            //optionButton.interactable = true;
         }
         else
         {
-            lockIcon?.SetActive(true);
-            optionButton.interactable = true;
+            lockIcon.SetActive(true);
+            //optionButton.interactable = true;
         }
     }
 
